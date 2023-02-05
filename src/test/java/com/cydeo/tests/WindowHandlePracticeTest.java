@@ -12,6 +12,39 @@ public class WindowHandlePracticeTest {
     WindowHandlePracticePage windowHandlePracticePage = new WindowHandlePracticePage();
 
     @Test
+    public void windowsBoban(){
+        //1. Go to website: http://practice.cydeo.com/windows
+        Driver.getDriver().get("http://practice.cydeo.com/windows");
+
+        //2. Assert: Title is “Windows”
+        Assert.assertTrue(Driver.getDriver().getTitle().equals("Windows"));
+        String currentWindow = Driver.getDriver().getWindowHandle();
+
+        //3. Click to: “Click Here” link
+        windowHandlePracticePage.clickHereLink.click();
+
+        //4. Click to: “Cydeo” link
+        windowHandlePracticePage.cydeoLink.click();
+
+        //5. Switch to Cydeo page
+        Set<String> allWindows = Driver.getDriver().getWindowHandles();
+        for (String eachWindow : allWindows) {
+            Driver.getDriver().switchTo().window(eachWindow);
+            System.out.println(Driver.getDriver().getTitle());
+            if(Driver.getDriver().getTitle().equals("Cydeo"))
+                break;
+        }
+
+        //6. Assert: Title is “Cydeo”
+        Assert.assertTrue(Driver.getDriver().getTitle().equals("Cydeo"));
+
+        //7.Switch back to main handle
+        Driver.getDriver().switchTo().window(currentWindow);
+        Assert.assertTrue(Driver.getDriver().getTitle().equals("Windows"));
+        Driver.closeDriver();
+    }
+
+    @Test
     public void windowHandleTest(){
 
         //1. Go to website: http://practice.cydeo.com/windows
@@ -51,4 +84,6 @@ public class WindowHandlePracticeTest {
         Assert.assertEquals(Driver.getDriver().getTitle(),"Windows");
 
     }
+
+
 }

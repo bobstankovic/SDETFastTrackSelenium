@@ -11,6 +11,25 @@ public class AlertPracticeTest {
     AlertPracticePage alertPracticePage = new AlertPracticePage();
 
     @Test
+    public void alertBoban(){
+        //1. Go to website: http://practice.cydeo.com/javascript_alerts
+        Driver.getDriver().get("http://practice.cydeo.com/javascript_alerts");
+
+        //2. Click for JS Prompt button for alert to be displayed
+        alertPracticePage.jsAlertBtn.click();
+
+        //3. Write "hello" in input text
+        Alert alert = Driver.getDriver().switchTo().alert();
+        alert.sendKeys("hello");
+        alert.accept();
+
+        //4. Verify "You entered: hello" text is displayed in result
+        Assert.assertTrue(alertPracticePage.resultText.getText().contains("hello"));
+
+        Driver.closeDriver();
+    }
+
+    @Test
     public void jsAlertTest(){
         //1. Go to website: http://practice.cydeo.com/javascript_alerts
         Driver.getDriver().get("http://practice.cydeo.com/javascript_alerts");

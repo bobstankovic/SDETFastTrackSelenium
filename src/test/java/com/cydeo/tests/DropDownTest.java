@@ -15,6 +15,23 @@ public class DropDownTest {
 
     DropDownPage dropDownPage = new DropDownPage();
 
+    @Test
+    public void dropDownBoban(){
+        //2. Select Illinois --> select by visible text
+        Select select = new Select(dropDownPage.stateDropdown);
+        select.selectByVisibleText("Illinois");
+
+        //3. Select Virginia --> select by value
+        select.selectByValue("VA");
+
+        //4. Select California --> select by index
+        select.selectByIndex(5);
+
+        //5. Verify final selected option is California.
+        Assert.assertTrue(select.getFirstSelectedOption().getText().equals("California"));
+
+    }
+
     @BeforeMethod
     public void setUp(){
         //TC#1
